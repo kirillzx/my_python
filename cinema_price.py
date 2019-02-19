@@ -23,6 +23,8 @@ def discount(n):
         print('Ваша скидка составит 5% ')
     elif n == 'сегодня':
         print('К сожалению у вас нет скидки ')
+    else:
+        print('Вы ввели не правильную дату')
 def film_friday(n):
     global k
     if n == 12:
