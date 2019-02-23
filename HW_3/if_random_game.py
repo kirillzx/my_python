@@ -7,5 +7,3 @@ elif a > n:
     print('Its more than necessary\nTry again')
 elif a < n:
     print('Its less than necessary\nTry again')
-
-
