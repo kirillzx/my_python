@@ -10,5 +10,5 @@ print(b)
 print(list(map(sqrt,a)))
 
 #by the generator list
-c = [sqrt((a[i])) for i in range(len(a))]
+c = [sqrt(a[i]) for i in range(len(a))]
 print(c)
