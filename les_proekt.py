@@ -45,4 +45,4 @@ v.set('Текст')
 op=OptionMenu(root,v,'Текст','HTML')
 op.grid(row=3,column=1)
 
-root.mainloop()
+root.mainloop() 
