@@ -16,8 +16,8 @@ def writer():
         else:
             with open('proekt.html','w') as file:
                 file.write(str(a))
-    except ValueError:
-        print('Ошибка!!!\nВведите число')
+    except Exception as e:
+        print(e)
     
 root=Tk()
 
