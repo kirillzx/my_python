@@ -15,6 +15,9 @@ def add():  # Функция добавления задачи
         dictionary['time'] = entry_time.get()  # Ипользуется встроенная библиотека вывода сообщений Messagebox
         lst.append(dictionary)
         writer(lst)
+        entry_task.delete(0,END)
+        entry_category.delete(0,END)
+        entry_time.delete(0,END)
     elif entry_task.get() == '' and entry_category.get() != '' and entry_time.get() != '':
         mb.showerror("Ошибка", "Вы не ввели задачу")
     elif entry_task.get() != '' and entry_category.get() == '' and entry_time.get() != '':
