@@ -16,64 +16,26 @@ for _ in range(n): #read the array elements line by line
     futurePrices.append(int(input()))
 
 def selectStocks(saving, current, future):
-    profit = [] #array of profits
-    p = 0 #the result of all stock profits
+    profits = [] #array of profits
+    n = len(current)
 
-    for i in range(len(current)): #get the profit of each stock
-        temp = future[i] - current[i] #calc the difference between the future price and current
+    for i in range(n): #get the profit of each stock
+        profits.append(future[i] - current[i]) #calc the difference between the future price and current
 
-        if temp > 0: #take just positive values
-            profit.append((i, temp))
+    matrix = [[0 for _ in range(saving + 1)] for _ in range(n + 1)] #create the profits matrix for dynamic programming
 
-    if len(profit) != 0: #if we can get the profit from stocks, so there are values greater then 0
-        profit = sorted(profit, reverse=True, key=lambda x: x[1]) #sort in descending order by second element (by profit)
+    for i in range(n + 1): #for all stocks
+        for price in range(saving + 1): #and for all prices
+            if i == 0 or price == 0: #if we take 0 stocks then profit 0
+                matrix[i][price] = 0
 
-        cost = current[profit[0][0]] #price of greater stock
+            elif current[i-1] <= price: #if current price of stock i less or equal then current price
+                #choose the max between previous profit at the same price and the previous profit plus profit of current stock
+                matrix[i][price] = max(profits[i-1] + matrix[i-1][price - current[i-1]], matrix[i-1][price])
 
-        for i, item in profit:
-            if  cost <= saving: #if price under constraint
-                p += item       #calc the profit
-                cost += current[i]  #increase the current price
+            else: #if current price greater then saving
+                matrix[i][price] = matrix[i-1][price]
 
-        return p
-
-    else: #if profit equal or less zero then return 0
-        return 0
+    return matrix[n][saving]
 
 print(selectStocks(saving, currentPrices, futurePrices))
-
-"""
-Test 1
-
-30
-4
-1
-2
-4
-6
-4
-5
-3
-5
-6
-
-"""
-
-"""
-Test 2
-
-500
-5
-150
-199
-200
-168
-153
-5
-140
-175
-199
-121
-111
-
-"""
